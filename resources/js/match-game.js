@@ -59,7 +59,7 @@ MatchGame.renderCards = function(cardValues,$game){
       'hsl(360, 85%, 65%)'];
     $game.empty();
     for(i=0;i<cardValues.length;i++){
-      var $cardelement = $('<div class="col-xs-3 col-md-3 col-lg-3 card"></div>');
+      var $cardelement = $('<div class="col-sm-3 card"></div>');
       $cardelement.data('value',cardValues[i]);
       $cardelement.data('flipped',false);
       if(num.indexOf(cardValues[i])>=0){
