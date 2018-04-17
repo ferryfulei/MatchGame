@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Match Game</title>
+  <link rel="stylesheet" href="resources/css/reset.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
+  <link rel="stylesheet" href="resources/css/style.css">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+  <div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-3" id="heading">
+      <h2>Match Game</h2>
+      <h5>Rules</h5>
+      <p>Click on a card to reveal the number on the other side. Click on a second card to try and find a match to the first.
+         If you succeed, the pair will be removed from play. If not, try again!</p>
+      <h5>How To Win</h5>
+      <p>You win when all pairs have been found.</p>
+      <button type="button" class="btn btn-primary btn-lg">Restart Game</button>
+      <div id="hideMsg">
+        There are <span>120</span> seconds remaining.
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-9">
+      <div class="container">
+        <div class="row" id="game">
+
+        </div>
+    </div>
+  </div>
+</div>
+  <script
+    src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
+  <script type="text/javascript" src="./resources/js/match-game.js"></script>
+  <script type="text/javascript" src="./resources/js/tests.js"></script>
+</body>
+</html>
