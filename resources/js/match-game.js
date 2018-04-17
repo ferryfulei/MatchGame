@@ -100,11 +100,11 @@ MatchGame.flipCard = function($card,$game) {
       {
         cardtrack[0].css({
           "opacity":"0",
-          "color":"rgb(153,153,153)"
+          "background-color":"darkgrey"
         }).show().animate({opacity:1});
         cardtrack[1].css({
           "opacity":"0",
-          "color":"rgb(153,153,153)"
+          "background-color":"darkgrey"
         }).show().animate({opacity:1});
         remaining = remaining - 2;
         MatchGame.remainingcheck(remaining);
