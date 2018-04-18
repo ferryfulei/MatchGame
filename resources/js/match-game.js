@@ -1,8 +1,10 @@
 var MatchGame = {};
 var chinese=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
-var french=['un','duex','trois','quatre','clinq','six','sept','huit','neuf','dix','onze','douze','treize','quatorze','quinze','seize','dix-sept','dix-huit','dix-neuf','vingt'];
+var english=['un','duex','trois','quatre','clinq','six','sept','huit','neuf','dix','onze','douze','treize','quatorze','quinze','seize','dix-sept','dix-huit','dix-neuf','vingt'];
 var unit1french = ["l'école","les toilettes","le casier","la fontaine","magasin","le bureau","le stade","edudient"];
 var unit1chinese = ["学校","厕所","更衣室","喷泉","商店","图书馆","办公室","学生"];
+var french = ['one','two','three','four','five','six','seven','eight','nine','ten',
+'eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen','twenty'];
 var remaining = 16;
 $(document).ready(function(){
   debugger;
@@ -66,7 +68,7 @@ MatchGame.renderCards = function(cardValues,$game){
       'hsl(360, 85%, 65%)'];
     $game.empty();
     for(i=0;i<cardValues.length;i++){
-      var $cardelement = $('<div class="col-sm-3 cards"></div>');
+      var $cardelement = $('<div class="col-sm-3 cards text">'+cardValues[i]+'</div>');
       $cardelement.data('value',cardValues[i]);
       $cardelement.data('flipped',false);
       $cardelement.data('color',colorArray[Math.floor(i/2)]);
@@ -93,7 +95,6 @@ MatchGame.flipCard = function($card,$game) {
     $game.data('track').push($card);
     var cardtrack = $game.data('track');
     if(cardtrack.length===2){
-      debugger
       var num1 = chinese.indexOf(cardtrack[0].data('value'));
       var num2 = chinese.indexOf(cardtrack[1].data('value'))
       var num3 = french.indexOf(cardtrack[1].data('value'))
@@ -115,10 +116,8 @@ MatchGame.flipCard = function($card,$game) {
         MatchGame.remainingcheck(remaining);
       }else{
         window.setTimeout(function() {
-        cardtrack[0].css('background-color','rgb(32,64,86)');
-        cardtrack[1].css('background-color','rgb(32,64,86)');
-        cardtrack[0].text('');
-        cardtrack[1].text('');
+        cardtrack[0].css('background-color','black');
+        cardtrack[1].css('background-color','black');
         cardtrack[0].data('flipped',false);
         cardtrack[1].data('flipped',false);
       } , 150);
