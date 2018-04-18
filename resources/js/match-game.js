@@ -1,6 +1,6 @@
 var MatchGame = {};
-var num=['苹果','香蕉','柠檬','水果','橘子','桃子','灰色','照片'];
-var english=['apple','banana','lemon','fruit','orange','peach','grey','photo'];
+var num=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+var english=['un','duex','trois','quatre','clinq','six','sept','huit','neuf','dix','onze','douze','treize','quatorze','quinze','seize','dix-sept','dix-huit','dix-neuf','vingt'];
 var remaining = 16;
 $(document).ready(function(){
   var cardValues = MatchGame.generateCardValues();
@@ -24,28 +24,24 @@ $(document).ready(function(){
  });
 
 MatchGame.generateCardValues = function () {
-  var originalArray = new Array;
-  for(i=0;i<8;i++){
-    originalArray.push(num[i]);
-    originalArray.push(english[i]);
-  }
-  var newArray = new Array;
-  while(originalArray.length!==0){
-    function getRandomInt(max) {
-      return Math.floor(Math.random() * Math.floor(max));
-    }
-    var index = getRandomInt(originalArray.length);
-    newArray.push(originalArray[index]);
-    originalArray.splice(index,1);
-  }
-  return newArray;
+   var newArray = new Array;
+   while(newArray.length<16){
+     var index = getRandomInt(num.length);
+     newArray.push(num[index]);
+     newArray.push(english[index]);
+   }
+   return newArray;
 };
 
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
 /*
   Converts card values to jQuery card objects and adds them to the supplied game
   object.
 */
 MatchGame.renderCards = function(cardValues,$game){
+  debugger;
     var $card = $('.card');
     $game.data('track',[]);
     var colorArray = [
@@ -62,13 +58,8 @@ MatchGame.renderCards = function(cardValues,$game){
       var $cardelement = $('<div class="col-sm-3 card"></div>');
       $cardelement.data('value',cardValues[i]);
       $cardelement.data('flipped',false);
-      if(num.indexOf(cardValues[i])>=0){
-        var j=num.indexOf(cardValues[i]);
-      }else{
-        var j=english.indexOf(cardValues[i]);
-      }
-      $cardelement.data('color',colorArray[j]);
-      $game.append($cardelement);
+      $cardelement.data('color',colorArray[Math.floor(i/2)]);
+      $game .append($cardelement);
     };
     $(".card").click(function(){
       MatchGame.flipCard($(this),$('#game'));
@@ -122,13 +113,34 @@ MatchGame.flipCard = function($card,$game) {
     }
   }
 }
-
+function getindex(input){
+  if(num.indexOf(input)>=0){
+    return num.indexOf(input);
+  }else{
+    return english.indexOf(input);
+  }
+}
 MatchGame.remainingcheck = function(remaining){
   debugger
   if(remaining == 0){
     $('#game').html('<h2 id="win"> You win. </h2>');
     clearInterval(timer);
   }
+}
+function rearrange(input){
+  debugger;
+  var newArray = [];
+  for(i=0;i<input.length;i++){
+    for(j=i+1;j<input.length;j++){
+        var a = getindex(input[i])
+        var b = getindex(input[j])
+        if(a == b){
+          newArray.push(input[i]);
+          newArray.push(input[j]);
+        }
+      }
+  }
+  return newArray;
 }
 var timer ;
 function mytimer(){
