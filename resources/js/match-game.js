@@ -11,6 +11,7 @@ $(document).ready(function(){
   var cardValues = MatchGame.generateCardValues();
   var $game = $('#game');
   MatchGame.renderCards(cardValues,$game);
+  $('#exampleModalLong').modal('show');
 })
 /*
   Sets up a new game after HTML document has loaded.
