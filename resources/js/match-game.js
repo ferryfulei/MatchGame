@@ -25,7 +25,7 @@ $('.btn-outline-primary').click(function(){
   chinese = unit1chinese;
   french = unit1french
 })
- $('.btn').click(function(){
+ $('.btn-primary').click(function(){
    var cardValues = MatchGame.generateCardValues();
    var $game = $('#game');
    MatchGame.renderCards(cardValues,$game);
@@ -55,7 +55,7 @@ function getRandomInt(max) {
 */
 MatchGame.renderCards = function(cardValues,$game){
   debugger;
-    var $card = $('.card');
+    var $card = $('.cards');
     $game.data('track',[]);
     var colorArray = [
       'hsl(25, 85%, 65%)',
@@ -68,7 +68,8 @@ MatchGame.renderCards = function(cardValues,$game){
       'hsl(360, 85%, 65%)'];
     $game.empty();
     for(i=0;i<cardValues.length;i++){
-      var $cardelement = $('<div class="col-sm-3 cards"></div>');
+      debugger
+      var $cardelement = $('<div class="col-sm-3 text cards">'+cardValues[i]+'</div>');
       $cardelement.data('value',cardValues[i]);
       $cardelement.data('flipped',false);
       $cardelement.data('color',colorArray[Math.floor(i/2)]);
@@ -79,6 +80,10 @@ MatchGame.renderCards = function(cardValues,$game){
       MatchGame.flipCard($(this),$('#game'));
     })
     mytimer();
+    countdown();
+    setTimeout(function () {
+      $('.cards').empty();
+    },5000);
 }
 /*
   Flips over a given card and checks to see if two cards are flipped over.
@@ -169,10 +174,24 @@ function mytimer(){
    }
 },1000);
 }
+
 function shuffle(div) {
     var parent = $(div);
     var divs = parent.children();
     while (divs.length) {
         parent.append(divs.splice(Math.floor(Math.random() * divs.length), 1)[0]);
     }
+}
+function countdown(){
+  var sec = 5;
+  clearInterval(timer);
+  timer = setInterval(function(){
+   --sec;
+   var current = (sec/5)*100;
+   var currentvalue = current.toString() + "%";
+   $('.progress-bar').css('width',currentvalue);
+   if (sec == 0) {
+     clearInterval(timer);
+   }
+},1000);
 }
