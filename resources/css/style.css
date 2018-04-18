@@ -6,18 +6,20 @@ body{
   padding-top: 5.25rem;
 }
 h2{
+  margin-bottom: 2rem;
   font-weight: bold;
   font-size: 2.5rem;
   color: rgb(32,64,86);
 }
 h5{
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-weight: bold;
 }
 p{
+  font-size: 1.5rem;
   color: rgb(74,74,74);
 }
-.card{
+.cards{
   background-color: rgb(32,64,86);
   border: 4px solid #ffffff;
   border-radius: 8px;
@@ -26,9 +28,12 @@ p{
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: all 100ms
 }
-.card:hover{
+.cards:active, .cards:hover{
   cursor: default;
+  background-color: darkgrey;
+  animation-iteration-count: infinite;
 }
 .text{
   display: flex;
@@ -44,8 +49,20 @@ p{
   font-size: 10rem;
 }
 #hideMsg{
-  font-size: 2rem;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
 }
 span{
   color: red;
+}
+.btn-lg{
+  width: 100%;
+  margin-bottom: 1rem;
+}
+#dropdownMenuButton{
+  width: 100%;
+}
+.progress {
+  width: 100%;
+  margin-bottom: 1rem;
 }

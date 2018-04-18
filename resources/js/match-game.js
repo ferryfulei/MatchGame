@@ -1,8 +1,11 @@
 var MatchGame = {};
-var num=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
-var english=['un','duex','trois','quatre','clinq','six','sept','huit','neuf','dix','onze','douze','treize','quatorze','quinze','seize','dix-sept','dix-huit','dix-neuf','vingt'];
+var chinese=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+var french=['un','duex','trois','quatre','clinq','six','sept','huit','neuf','dix','onze','douze','treize','quatorze','quinze','seize','dix-sept','dix-huit','dix-neuf','vingt'];
+var unit1french = ["l'école","les toilettes","le casier","la fontaine","magasin","le bureau","le stade","edudient"];
+var unit1chinese = ["学校","厕所","更衣室","喷泉","商店","图书馆","办公室","学生"];
 var remaining = 16;
 $(document).ready(function(){
+  debugger;
   var cardValues = MatchGame.generateCardValues();
   var $game = $('#game');
   MatchGame.renderCards(cardValues,$game);
@@ -16,7 +19,10 @@ $(document).ready(function(){
   Generates and returns an array of matching card values.
  */
 
-
+$('.btn-outline-primary').click(function(){
+  chinese = unit1chinese;
+  french = unit1french
+})
  $('.btn').click(function(){
    var cardValues = MatchGame.generateCardValues();
    var $game = $('#game');
@@ -24,11 +30,16 @@ $(document).ready(function(){
  });
 
 MatchGame.generateCardValues = function () {
+  debugger
+  var tempchinese = chinese.slice();
+  var tempfrench = french.slice();
    var newArray = new Array;
    while(newArray.length<16){
-     var index = getRandomInt(num.length);
-     newArray.push(num[index]);
-     newArray.push(english[index]);
+     var index = getRandomInt(tempchinese.length);
+     newArray.push(tempchinese[index]);
+     newArray.push(tempfrench[index]);
+     tempchinese.splice(index,1);
+     tempfrench.splice(index,1);
    }
    return newArray;
 };
@@ -55,13 +66,14 @@ MatchGame.renderCards = function(cardValues,$game){
       'hsl(360, 85%, 65%)'];
     $game.empty();
     for(i=0;i<cardValues.length;i++){
-      var $cardelement = $('<div class="col-sm-3 card"></div>');
+      var $cardelement = $('<div class="col-sm-3 cards"></div>');
       $cardelement.data('value',cardValues[i]);
       $cardelement.data('flipped',false);
       $cardelement.data('color',colorArray[Math.floor(i/2)]);
       $game .append($cardelement);
     };
-    $(".card").click(function(){
+    shuffle($game);
+    $(".cards").click(function(){
       MatchGame.flipCard($(this),$('#game'));
     })
     mytimer();
@@ -81,23 +93,25 @@ MatchGame.flipCard = function($card,$game) {
     $game.data('track').push($card);
     var cardtrack = $game.data('track');
     if(cardtrack.length===2){
-      var num1 = num.indexOf(cardtrack[0].data('value'));
-      var num2 = num.indexOf(cardtrack[1].data('value'))
-      var num3 = english.indexOf(cardtrack[1].data('value'))
-      var num4 = english.indexOf(cardtrack[0].data('value'))
+      debugger
+      var num1 = chinese.indexOf(cardtrack[0].data('value'));
+      var num2 = chinese.indexOf(cardtrack[1].data('value'))
+      var num3 = french.indexOf(cardtrack[1].data('value'))
+      var num4 = french.indexOf(cardtrack[0].data('value'))
       var a = (num1 == num3)&&(num1>=0);
       var b = (num2 == num4)&&(num2>=0);
       if(a||b)
       {
         cardtrack[0].css({
-          "opacity":"0",
           "background-color":"darkgrey"
-        }).show().animate({opacity:1});
+        })
         cardtrack[1].css({
-          "opacity":"0",
           "background-color":"darkgrey"
-        }).show().animate({opacity:1});
+        })
         remaining = remaining - 2;
+        var current = ((16-remaining)/16)*100;
+        var currentvalue = current.toString() + "%";
+        $('.progress-bar').css('width',currentvalue);
         MatchGame.remainingcheck(remaining);
       }else{
         window.setTimeout(function() {
@@ -114,10 +128,10 @@ MatchGame.flipCard = function($card,$game) {
   }
 }
 function getindex(input){
-  if(num.indexOf(input)>=0){
-    return num.indexOf(input);
+  if(chinese.indexOf(input)>=0){
+    return chinese.indexOf(input);
   }else{
-    return english.indexOf(input);
+    return french.indexOf(input);
   }
 }
 MatchGame.remainingcheck = function(remaining){
@@ -153,4 +167,11 @@ function mytimer(){
       $('#game').html('<h2 id="win"> You lose. </h2>');
    }
 },1000);
+}
+function shuffle(div) {
+    var parent = $(div);
+    var divs = parent.children();
+    while (divs.length) {
+        parent.append(divs.splice(Math.floor(Math.random() * divs.length), 1)[0]);
+    }
 }
