@@ -157,7 +157,7 @@ function rearrange(input){
 }
 var timer ;
 function mytimer(){
-  var sec = 120;
+  var sec = 45;
   clearInterval(timer);
   timer = setInterval(function(){
    $('#hideMsg span').text(--sec);
