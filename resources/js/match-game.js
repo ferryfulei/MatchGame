@@ -68,7 +68,7 @@ MatchGame.renderCards = function(cardValues,$game){
       'hsl(360, 85%, 65%)'];
     $game.empty();
     for(i=0;i<cardValues.length;i++){
-      var $cardelement = $('<div class="col-sm-3 cards text">'+cardValues[i]+'</div>');
+      var $cardelement = $('<div class="col-sm-3 cards"></div>');
       $cardelement.data('value',cardValues[i]);
       $cardelement.data('flipped',false);
       $cardelement.data('color',colorArray[Math.floor(i/2)]);
@@ -89,8 +89,8 @@ MatchGame.flipCard = function($card,$game) {
   if($card.data('flipped')===true){
     return
   }else{
-    $card.css('background-color',$card.data('color'));
     $card.html('<span class="text">'+$card.data('value')+'</span>');
+    $card.css('background-color','darkgrey');
     $card.data('flipped',true);
     $game.data('track').push($card);
     var cardtrack = $game.data('track');
@@ -104,10 +104,10 @@ MatchGame.flipCard = function($card,$game) {
       if(a||b)
       {
         cardtrack[0].css({
-          "background-color":"darkgrey"
+          "background-color": cardtrack[0].data('color')
         })
         cardtrack[1].css({
-          "background-color":"darkgrey"
+          "background-color": cardtrack[1].data('color')
         })
         remaining = remaining - 2;
         var current = ((16-remaining)/16)*100;
@@ -118,6 +118,8 @@ MatchGame.flipCard = function($card,$game) {
         window.setTimeout(function() {
         cardtrack[0].css('background-color','black');
         cardtrack[1].css('background-color','black');
+        cardtrack[0].text('');
+        cardtrack[1].text('');
         cardtrack[0].data('flipped',false);
         cardtrack[1].data('flipped',false);
       } , 150);
