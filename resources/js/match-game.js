@@ -7,7 +7,6 @@ var french = ['one','two','three','four','five','six','seven','eight','nine','te
 'eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen','twenty'];
 var remaining = 16;
 $(document).ready(function(){
-  debugger;
   var cardValues = MatchGame.generateCardValues();
   var $game = $('#game');
   MatchGame.renderCards(cardValues,$game);
@@ -33,7 +32,7 @@ $('.btn-outline-primary').click(function(){
  });
 
 MatchGame.generateCardValues = function () {
-  debugger
+
   var tempchinese = chinese.slice();
   var tempfrench = french.slice();
    var newArray = new Array;
@@ -55,7 +54,6 @@ function getRandomInt(max) {
   object.
 */
 MatchGame.renderCards = function(cardValues,$game){
-  debugger;
     var $card = $('.cards');
     $game.data('track',[]);
     var colorArray = [
@@ -69,7 +67,6 @@ MatchGame.renderCards = function(cardValues,$game){
       'hsl(360, 85%, 65%)'];
     $game.empty();
     for(i=0;i<cardValues.length;i++){
-      debugger
       var $cardelement = $('<div class="col-sm-3 text cards">'+cardValues[i]+'</div>');
       $cardelement.data('value',cardValues[i]);
       $cardelement.data('flipped',false);
@@ -142,14 +139,12 @@ function getindex(input){
   }
 }
 MatchGame.remainingcheck = function(remaining){
-  debugger
   if(remaining == 0){
     $('#game').html('<h2 id="win"> You win. </h2>');
     clearInterval(timer);
   }
 }
 function rearrange(input){
-  debugger;
   var newArray = [];
   for(i=0;i<input.length;i++){
     for(j=i+1;j<input.length;j++){
