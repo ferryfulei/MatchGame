@@ -5,27 +5,33 @@ var unit1french = ["l'école","les toilettes","le casier","la fontaine","magasin
 var unit1chinese = ["学校","厕所","更衣室","喷泉","商店","图书馆","办公室","学生"];
 var french = ['one','two','three','four','five','six','seven','eight','nine','ten',
 'eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen','twenty'];
+var delaytime = 300;
+var startdelay = 10000;
+
 var remaining = 16;
 $(document).ready(function(){
   var cardValues = MatchGame.generateCardValues();
   var $game = $('#game');
   MatchGame.renderCards(cardValues,$game);
-  $('#exampleModalLong').modal('show');
 })
-/*
-  Sets up a new game after HTML document has loaded.
-  Renders a 4x4 board of cards.
-*/
-
-/*
-  Generates and returns an array of matching card values.
- */
+$('#easy').click(function(){
+  delaytime = 300;
+  startdelay = 10000;
+})
+$('#medium').click(function(){
+  delaytime = 200;
+  startdelay = 8000;
+})
+$('#hard').click(function(){
+  delaytime = 150;
+  startdelay = 1000;
+})
 
 $('.btn-outline-primary').click(function(){
   chinese = unit1chinese;
   french = unit1french
 })
- $('.btn-primary').click(function(){
+ $('#restart').click(function(){
    var cardValues = MatchGame.generateCardValues();
    var $game = $('#game');
    MatchGame.renderCards(cardValues,$game);
@@ -125,7 +131,7 @@ MatchGame.flipCard = function($card,$game) {
         cardtrack[1].text('');
         cardtrack[0].data('flipped',false);
         cardtrack[1].data('flipped',false);
-      } , 150);
+      } , delaytime);
       }
       $game.data('track',[]);
     }
@@ -168,7 +174,7 @@ function mytimer(){
      clearInterval(timer);
       $('#game').html('<h2 id="win"> You lose. </h2>');
    }
-},1000);
+},startdelay);
 }
 
 function shuffle(div) {
@@ -179,15 +185,15 @@ function shuffle(div) {
     }
 }
 function countdown(){
-  var sec = 5;
+  var sec = startdelay/1000;
   clearInterval(timer);
   timer = setInterval(function(){
-   --sec;
-   var current = (sec/5)*100;
+   sec = sec -0.1;
+   var current = (sec/10)*100;
    var currentvalue = current.toString() + "%";
    $('.progress-bar').css('width',currentvalue);
    if (sec == 0) {
      clearInterval(timer);
    }
-},1000);
+},100);
 }
