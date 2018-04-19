@@ -1,5 +1,5 @@
 var MatchGame = {};
-var chinese=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+var orichinese=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
 var english=['un','duex','trois','quatre','clinq','six','sept','huit','neuf','dix','onze','douze','treize','quatorze','quinze','seize','dix-sept','dix-huit','dix-neuf','vingt'];
 var unit1french = ["appeler(s')","blenvenue","bonjour","ce","club","et","etre","edudiant"];
 var unit1chinese = ["名叫","欢迎","您好","这","俱乐部","和","是","大学生"];
@@ -7,16 +7,18 @@ var unit2french = ["a","ah","assistant(e)","badge","Belge","cafe","carte","chino
 var unit2chinese = ["在","啊","助理","证章","比利时人","咖啡","卡片","中国的"];
 var unit3french = ["adresse","age","aller","alors","ami(e)","an","au revior","avec"];
 var unit3chinese = ["地址","年龄","去","那么","朋友","年","再见","和...一起"];
-var french = ['one','two','three','four','five','six','seven','eight','nine','ten',
+var orifrench = ['one','two','three','four','five','six','seven','eight','nine','ten',
 'eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen','twenty'];
 var keepgoing;
-var delaytime = 300;
+var delaytime = 200;
 var startdelay = 15000;
 var timelimit = 60000;
 var remaining = 16;
 var gamestart = false;
 var customfrench = [];
 var customchinese = [];
+var french = orifrench;
+var chinese = orichinese;
 $(document).ready(function () {
   $('#help').modal('show');
   var cardValues = MatchGame.generateCardValues();
@@ -24,24 +26,21 @@ $(document).ready(function () {
   MatchGame.renderCards(cardValues,$game);
 })
 $('#easy').click(function(){
-  delaytime = 300;
   startdelay = 15000;
   timelimit = 60000;
 })
 $('#medium').click(function(){
-  delaytime = 200;
   startdelay = 10000;
   timelimit = 45000;
 })
 $('#hard').click(function(){
-  delaytime = 150;
   startdelay = 5000;
   timelimit = 30000;
 })
 
-$('#demo').click(function () {
-  french = french;
-  chinese = chinese;
+$('#Number').click(function () {
+  french = orifrench;
+  chinese = orichinese;
 })
 $('#unit1').click(function () {
   french = unit1french;
@@ -59,7 +58,9 @@ $('#custom').click(function () {
   french = customfrench;
   chinese = customchinese;
 })
- $('#restart').click(function(){
+ $('.restart').click(function(){
+   clearTimeout(keepgoing);
+   var gamestart = false;
    var cardValues = MatchGame.generateCardValues();
    var $game = $('#game');
    MatchGame.renderCards(cardValues,$game);
@@ -95,6 +96,7 @@ function getRandomInt(max) {
   object.
 */
 MatchGame.renderCards = function(cardValues,$game){
+    remaining = 16;
     var $card = $('.cards');
     $game.data('track',[]);
     document.getElementById("progress").classList.add('bg-danger')
@@ -156,6 +158,14 @@ MatchGame.flipCard = function($card,$game) {
         cardtrack[1].css({
           "background-color": cardtrack[1].data('color')
         })
+        setTimeout(function () {
+          cardtrack[0].css({
+            "background-color": "transparent"
+          })
+          cardtrack[1].css({
+            "background-color": "transparent"
+          })
+        },300)
         remaining = remaining - 2;
         MatchGame.remainingcheck(remaining);
       }else{
@@ -181,7 +191,9 @@ function getindex(input){
 }
 MatchGame.remainingcheck = function(remaining){
   if(remaining == 0){
-    $('#game').html('<h2 id="win"> You win. </h2>');
+    $('#game').html('<h2 id="win"> YOU WIN <i class="fas fa-trophy"></i></h2>');
+    $('#game').append('<button type="button" id= "restart" class="btn btn-primary btn-lg restart"><i class="fas fa-redo fa-2x" style="color: purple"></i></button>')
+    $('#game').append('<button type="button" id= "setting" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-cog fa-2x" style="color: darkgrey"></i></button>')
     clearInterval(timer);
   }
 }
@@ -238,24 +250,32 @@ function countdown(){
 $('#customsave').click(function () {
   debugger;
   var number = $('#numofword').val();
-  for(var i = 1; i <= number ; i++){
+  for(var i = 1; i <= number*2 ; i++){
     if (i%2 == 1){
-      frenchword = document.getElementsByTagName("input")[i].value
-      customfrench.push(frenchword);
+      customfrench.push(document.getElementsByTagName("input")[i].value);
     }else{
-      chineseword = document.getElementsByTagName("input")[i].value
-      customchinese.push(chineseword);
+      customchinese.push(document.getElementsByTagName("input")[i].value);
     }
   }
+  while (customfrench.length<8) {
+    var numindex = customfrench.length
+    for (var i = 0; i < numindex; i++) {
+      customfrench.push(customfrench[i])
+      customchinese.push(customchinese[i])
+    }
+  }
+  french = customfrench;
+  chinese = customchinese;
 })
 $('#generate').click(function () {
   var number = $('#numofword').val();
   $('.inputboxes').empty();
   for (var i = 1 ; i <= number ; i++ ){
-    $('.inputboxes').append($('<div class="input-group"><div class="input-group-prepend"><span class="input-group-text" id="">English(French)|Chinese</span></div><input type="text" class="form-control word first"><input type="text" class="form-control word second"></div>'));
+    $('.inputboxes').append($('<div class="input-group"><div class="input-group-prepend"><span class="input-group-text" id="">英语/法语 | 中文</span></div><input type="text" class="form-control word first"><input type="text" class="form-control word second"></div>'));
   }
 })
 MatchGame.renderCardssimple = function(cardValues,$game){
+    remaining = 16;
     var $card = $('.cards');
     $game.data('track',[]);
     var colorArray = [
@@ -281,12 +301,13 @@ MatchGame.renderCardssimple = function(cardValues,$game){
     })
     mytimer();
 }
+var longtimetrack = [];
 MatchGame.flipCardsimple = function($card,$game) {
-  $card.css('background-color','darkgrey');
   if(($card.data('flipped')===true)||(gamestart == false)){
     return
-  }else{
+  }else {
     $card.data('flipped',true);
+    $card.css('background-color','darkgrey');
     $game.data('track').push($card);
     var cardtrack = $game.data('track');
     if(cardtrack.length===2){
@@ -298,6 +319,8 @@ MatchGame.flipCardsimple = function($card,$game) {
       var b = (num2 == num4)&&(num2>=0);
       if(a||b)
       {
+        longtimetrack.push(cardtrack[0]);
+        longtimetrack.push(cardtrack[1]);
         cardtrack[0].css({
           "background-color": cardtrack[0].data('color')
         })
@@ -325,4 +348,6 @@ MatchGame.flipCardsimple = function($card,$game) {
       $game.data('track',[]);
     }
   }
+
+
 }

@@ -43,7 +43,7 @@ p{
   align-items: center;
   font-weight: 900;
   color: rgb(255, 255, 255);
-  font-size: 2.5rem;
+  font-size: 2rem;
 }
 #win{
   text-align: center;
@@ -113,12 +113,29 @@ input[type="text"] {
   color: blue;
 }
 h1{
-  margin-bottom: 2.5rem;
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
   font-weight: bold;
   font-size: 3.5rem;
   color: rgb(32,64,86);
   text-align: center;
 }
 footer{
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  border-top: solid rgb(255,216,143) 0.3rem;
   margin-top: 3rem;
+  width: 100%;
+}
+.form-control-sm, .input-group-sm>.form-control, .input-group-sm>.input-group-append>.btn, .input-group-sm>.input-group-append>.input-group-text, .input-group-sm>.input-group-prepend>.btn, .input-group-sm>.input-group-prepend>.input-group-text{
+  font-size: 3rem;
+}
+#restart{
+  background-color: transparent;
+}
+#setting{
+  background-color: transparent;
+}
+.input-group-text{
+  font-size: 2.5rem;
 }
