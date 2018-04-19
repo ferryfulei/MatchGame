@@ -11,8 +11,8 @@ var orifrench = ['one','two','three','four','five','six','seven','eight','nine',
 'eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen','twenty'];
 var keepgoing;
 var delaytime = 200;
-var startdelay = 15000;
-var timelimit = 60000;
+var startdelay = 10000;
+var timelimit = 45000;
 var remaining = 16;
 var gamestart = false;
 var customfrench = [];
@@ -223,11 +223,14 @@ function mytimer(){
    var current = (sec/(timelimit/1000))*100;
    var currentvalue = current.toString() + "%";
    $('.progress-bar').css('width',currentvalue);
-   if (sec == 0) {
-     clearInterval(timer);
-      $('#game').html('<h2 id="win"> You lose. </h2>');
+   if (sec <= 0.3) {
+       clearInterval(timer);
+      $('#game').html('<h2 id="win">YOU LOSE</h2>');
+      $('#game').append('<button type="button" id="button" class="btn btn-primary restart btn-lg"><i class="fas fa-redo fa-2x" style="color: purple"></i></button>')
+      $('#game').append('<button type="button" id= "setting" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-cog fa-2x" style="color: darkgrey"></i></button>')
    }
 },100);
+
 }
 
 function shuffle(div) {
