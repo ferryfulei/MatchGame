@@ -2,27 +2,28 @@ html{
   font-size: 14px;
   font-family: 'Work Sans', sans-serif;
 }
-body{
-  padding-top: 5.25rem;
-}
 h2{
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
   font-weight: bold;
   font-size: 2.5rem;
   color: rgb(32,64,86);
 }
+h3{
+  font-size: 3rem;
+}
 h5{
-  font-size: 2.5rem;
+  font-size: 3.5rem;
   font-weight: bold;
+  color: rgb(166,95,8);
 }
 p{
-  font-size: 2rem;
+  font-size: 3rem;
   color: rgb(74,74,74);
 }
 .cards{
   background-color: rgb(12,35,64);
   border: 4px solid #ffffff;
-  border-radius: 8px;
+  border-radius: 2rem;
   height: 12.5rem;
   border-color: rgb(255,216,143);
   width: auto;
@@ -34,7 +35,6 @@ p{
 .cards:active, .cards:hover{
   cursor: default;
   background-color: rgb(43,126,229);
-
   animation-iteration-count: infinite;
 }
 .text{
@@ -55,7 +55,8 @@ p{
   margin-bottom: 1rem;
 }
 span{
-  font-size: 2rem;
+  color: black;
+  font-size: 3rem;
 }
 .btn-lg{
   width: 100%;
@@ -81,8 +82,43 @@ span{
     justify-content: center;
     align-items: center;
     margin-bottom: 10%;
-    font-size: 2rem;
+    font-size: 3rem;
+}
+.btn-secondary{
+  background-color: black;
+  border-color: white;
+  height: 7rem;
+  min-width: 10rem;
+  border-radius: 1.25rem;
 }
 .btn{
   font-size: 2rem;
+}
+#customsave{
+  height: 7rem;
+  border-radius: 1.25rem;
+  width: 10rem;
+}
+.modal-dialog {
+      max-width: none;
+      margin: 1.75rem 2rem 1.75rem 2rem;
+  }
+input[type="text"] {
+  font-size:2rem;
+}
+#red{
+  color: red;
+}
+#blue{
+  color: blue;
+}
+h1{
+  margin-bottom: 2.5rem;
+  font-weight: bold;
+  font-size: 3.5rem;
+  color: rgb(32,64,86);
+  text-align: center;
+}
+footer{
+  margin-top: 3rem;
 }

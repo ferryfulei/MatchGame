@@ -9,6 +9,9 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 <body>
+  <header>
+      <h1>Word Match</h1>
+  </header>
   <div class="container">
     <div class="row">
       <div class="col-sm-12 col-md-12 col-lg-3" id="heading">
@@ -17,15 +20,15 @@
             <div class="col-sm-2 col-md-2 col-lg-12 square">
                             <!-- Button trigger modal -->
               <button type="button" class="btn btn-primary button" data-toggle="modal" data-target="#exampleModal">
-              <i class="fas fa-cog fa-3x" style="color: darkgrey"></i>
+              <i class="fas fa-cog fa-2x" style="color: darkgrey"></i>
               </button>
 
               <!-- Modal -->
               <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-dialog modal-lg modal-xl" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Setting</h5>
+                      <h5 class="modal-title" id="exampleModalLabel">设置</h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
@@ -36,7 +39,7 @@
                             <div class="card-header" id="headingOne">
                               <h5 class="mb-0">
                                 <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                  <span>Difficulty</span>
+                                  <span>难度</span>
                                 </button>
                               </h5>
                             </div>
@@ -44,9 +47,9 @@
                             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                               <div class="card-body">
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                  <button type="button" class="btn btn-secondary" id="easy">Easy</button>
-                                  <button type="button" class="btn btn-secondary" id="medium">Medium</button>
-                                  <button type="button" class="btn btn-secondary" id="hard">Hard</button>
+                                  <button type="button" class="btn btn-secondary" id="easy">简单</button>
+                                  <button type="button" class="btn btn-secondary" id="medium">中等</button>
+                                  <button type="button" class="btn btn-secondary" id="hard">难</button>
                                 </div>
                               </div>
                             </div>
@@ -55,7 +58,7 @@
                             <div class="card-header" id="headingTwo">
                               <h5 class="mb-0">
                                 <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                  <span>Source</span>
+                                  <span>词库</span>
                                 </button>
                               </h5>
                             </div>
@@ -63,10 +66,10 @@
                               <div class="card-body">
                                 <div class="btn-group" role="group" aria-label="Basic example">
                                   <button type="button" class="btn btn-secondary" id = "demo">Demo</button>
-                                  <button type="button" class="btn btn-secondary" id = "unit1">Unit1</button>
-                                  <button type="button" class="btn btn-secondary" id = "unit2">Unit2</button>
-                                  <button type="button" class="btn btn-secondary" id = "unit3">Unit3</button>
-                                  <button type="button" class="btn btn-secondary" id = "custom">Custom</button>
+                                  <button type="button" class="btn btn-secondary" id = "unit1">你好法语Unit1</button>
+                                  <button type="button" class="btn btn-secondary" id = "unit2">你好法语Unit2</button>
+                                  <button type="button" class="btn btn-secondary" id = "unit3">你好法语Unit3</button>
+                                  <button type="button" class="btn btn-secondary" id = "custom">自定义词库</button>
                                 </div>
                               </div>
                             </div>
@@ -83,25 +86,32 @@
             <div class="col-sm-2 col-md-2 col-lg-12 square">
               <!-- Button trigger modal -->
               <button type="button" class="btn btn-primary button" data-toggle="modal" data-target="#exampleModalLong1">
-                <i class="fas help fa-3x" style="color:tomato"></i>
+                <i class="fas help fa-2x" style="color:tomato"></i>
               </button>
 
               <!-- Modal -->
-              <div class="modal fade" id="exampleModalLong1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
+              <div class="modal fade" id="help" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-xl" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLongTitle">Help</h5>
+                      <h5 class="modal-title" id="exampleModalLongTitle">帮助 Word Match</h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
                     <div class="modal-body">
-                      <h3>Rules</h3>
-                      <p>Click on a card to reveal the number on the other side. Click on a second card to try and find a match to the first.
-                      If you succeed, the pair will be removed from play. If not, try again!</p>
-                      <h3>How to win</h3>
-                      <p> You win when all pairs have been found.</p>
+                      <h5>规则</h5>
+                      <h3>标准模式(默认)</h3>
+                      <p>游戏开始前5-10秒时间观察卡片位置，开始后点击卡片显示信息，对应成功消除卡片，对应失败翻回背面</p>
+                      <h3>简单模式</h3>
+                      <p>点击<i class="fas fa-font" style="color: blue"></i>进入简单模式，游戏中可以看到卡片信息</p>
+                      <h5>获胜条件</h5>
+                      <p>消除所有卡片</p>
+                      <p>点击<i class="fas fa-cog" style="color: darkgrey"></i>设置难度和词库</p>
+                      <p>点击<i class="fas help" style="color:tomato"></i>重新开始</p>
+                      <p>点击<i class="fas fa-pencil-alt" style="color: brown"></i>自定义词库词库</p>
+                      <p><strong id="red">红色进度条</strong>显示观察限时</p>
+                      <p><strong id="blue">蓝色进度条</strong>显示游戏限时</p>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>                    </div>
@@ -111,18 +121,18 @@
 
             </div>
             <div class="col-sm-2 col-md-2 col-lg-12 square">
-              <button type="button" id= "restart" class="btn btn-primary btn-lg button"><i class="fas fa-redo fa-3x" style="color: purple"></i></button>
+              <button type="button" id= "restart" class="btn btn-primary btn-lg button"><i class="fas fa-redo fa-2x" style="color: purple"></i></button>
             </div>
             <div class="col-sm-2 col-md-2 col-lg-12 square">
-              <button type="button" id= "starter" class="btn btn-primary btn-lg button"><i class="fas fa-font fa-3x" style="color: blue"></i></button>
+              <button type="button" id= "starter" class="btn btn-primary btn-lg button"><i class="fas fa-font fa-2x" style="color: blue"></i></button>
             </div>
             <div class="col-sm-2 col-md-2 col-lg-12 square">
-              <button type="button" class="btn btn-primary button" data-toggle="modal" data-target="#exampleModalLong2"><i class="fas fa-pencil-alt fa-3x" style="color: brown"></i></button>
+              <button type="button" class="btn btn-primary button" data-toggle="modal" data-target="#exampleModalLong2"><i class="fas fa-pencil-alt fa-2x" style="color: brown"></i></button>
               <div class="modal fade" id="exampleModalLong2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-dialog modal-lg modal-xl" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLongTitle">Add your own words!</h5>
+                      <h5 class="modal-title" id="exampleModalLongTitle">自定义词库</h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
@@ -130,18 +140,18 @@
                     <div class="modal-body">
                       <div class="input-group input-group-sm mb-3" id = "sourcegenerater">
                         <div class="input-group-prepend">
-                          <span class="input-group-text" id="inputGroup-sizing-sm"><p>Number of words you want to add (>=8)</p></span>
+                          <span class="input-group-text" id="inputGroup-sizing-sm"><p>添加单词数量</p></span>
                         </div>
                         <input type="text" id = "numofword" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-                        <button type="button" id="generate" class="btn btn-outline-secondary">Generate</button>
+                        <button type="button" id="generate" class="btn btn-outline-secondary">确认</button>
                         <div class="inputboxes">
 
                         </div>
                       </div>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-primary" id = "customsave">Save changes</button>
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>                    </div>
+                      <button type="button" class="btn btn-primary" id = "customsave">保存</button>
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>                    </div>
                   </div>
                 </div>
               </div>
@@ -160,6 +170,9 @@
         </div>
       </div>
     </div>
+  <footer>
+    Word Match is created and maintained by Lei Fu.
+  </footer>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>

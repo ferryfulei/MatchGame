@@ -9,26 +9,28 @@ var unit3french = ["adresse","age","aller","alors","ami(e)","an","au revior","av
 var unit3chinese = ["地址","年龄","去","那么","朋友","年","再见","和...一起"];
 var french = ['one','two','three','four','five','six','seven','eight','nine','ten',
 'eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen','twenty'];
+var keepgoing;
 var delaytime = 300;
-var startdelay = 10000;
+var startdelay = 15000;
 var timelimit = 60000;
 var remaining = 16;
 var gamestart = false;
 var customfrench = [];
 var customchinese = [];
-$(document).ready(function(){
+$(document).ready(function () {
+  $('#help').modal('show');
   var cardValues = MatchGame.generateCardValues();
   var $game = $('#game');
   MatchGame.renderCards(cardValues,$game);
 })
 $('#easy').click(function(){
   delaytime = 300;
-  startdelay = 10000;
+  startdelay = 15000;
   timelimit = 60000;
 })
 $('#medium').click(function(){
   delaytime = 200;
-  startdelay = 8000;
+  startdelay = 10000;
   timelimit = 45000;
 })
 $('#hard').click(function(){
@@ -63,8 +65,10 @@ $('#custom').click(function () {
    MatchGame.renderCards(cardValues,$game);
  });
  $('#starter').click(function(){
+   gamestart = true;
    var cardValues = MatchGame.generateCardValues();
    var $game = $('#game');
+   clearTimeout(keepgoing);
    document.getElementById("progress").classList.remove('bg-danger')
    MatchGame.renderCardssimple(cardValues,$game);
  });
@@ -116,8 +120,8 @@ MatchGame.renderCards = function(cardValues,$game){
       MatchGame.flipCard($(this),$('#game'));
     })
     countdown();
-    setTimeout(function () {
-      document.getElementById("progress").classList.remove('bg-warning');
+    keepgoing = setTimeout(function () {
+      document.getElementById("progress").classList.remove('bg-danger');
       $('.cards').empty();
       gamestart = true;
       mytimer();
@@ -300,6 +304,14 @@ MatchGame.flipCardsimple = function($card,$game) {
         cardtrack[1].css({
           "background-color": cardtrack[1].data('color')
         })
+        setTimeout(function () {
+          cardtrack[0].css({
+            "background-color": "transparent"
+          })
+          cardtrack[1].css({
+            "background-color": "transparent"
+          })
+        },300)
         remaining = remaining - 2;
         MatchGame.remainingcheck(remaining);
       }else{
