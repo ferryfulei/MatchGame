@@ -14,6 +14,8 @@ var startdelay = 10000;
 var timelimit = 60000;
 var remaining = 16;
 var gamestart = false;
+var customfrench = [];
+var customchinese = [];
 $(document).ready(function(){
   var cardValues = MatchGame.generateCardValues();
   var $game = $('#game');
@@ -34,6 +36,7 @@ $('#hard').click(function(){
   startdelay = 5000;
   timelimit = 30000;
 })
+
 $('#demo').click(function () {
   french = french;
   chinese = chinese;
@@ -50,12 +53,21 @@ $('#unit3').click(function () {
   french = unit3french;
   chinese = unit3chinese;
 })
+$('#custom').click(function () {
+  french = customfrench;
+  chinese = customchinese;
+})
  $('#restart').click(function(){
    var cardValues = MatchGame.generateCardValues();
    var $game = $('#game');
    MatchGame.renderCards(cardValues,$game);
  });
-
+ $('#starter').click(function(){
+   var cardValues = MatchGame.generateCardValues();
+   var $game = $('#game');
+   document.getElementById("progress").classList.remove('bg-danger')
+   MatchGame.renderCardssimple(cardValues,$game);
+ });
 MatchGame.generateCardValues = function () {
 
   var tempchinese = chinese.slice();
@@ -81,6 +93,7 @@ function getRandomInt(max) {
 MatchGame.renderCards = function(cardValues,$game){
     var $card = $('.cards');
     $game.data('track',[]);
+    document.getElementById("progress").classList.add('bg-danger')
     var colorArray = [
       'hsl(25, 85%, 65%)',
       'hsl(55, 85%, 65%)',
@@ -217,4 +230,87 @@ function countdown(){
      clearInterval(timer);
    }
 },100);
+}
+$('#customsave').click(function () {
+  debugger;
+  var number = $('#numofword').val();
+  for(var i = 1; i <= number ; i++){
+    if (i%2 == 1){
+      frenchword = document.getElementsByTagName("input")[i].value
+      customfrench.push(frenchword);
+    }else{
+      chineseword = document.getElementsByTagName("input")[i].value
+      customchinese.push(chineseword);
+    }
+  }
+})
+$('#generate').click(function () {
+  var number = $('#numofword').val();
+  $('.inputboxes').empty();
+  for (var i = 1 ; i <= number ; i++ ){
+    $('.inputboxes').append($('<div class="input-group"><div class="input-group-prepend"><span class="input-group-text" id="">English(French)|Chinese</span></div><input type="text" class="form-control word first"><input type="text" class="form-control word second"></div>'));
+  }
+})
+MatchGame.renderCardssimple = function(cardValues,$game){
+    var $card = $('.cards');
+    $game.data('track',[]);
+    var colorArray = [
+      'hsl(25, 85%, 65%)',
+      'hsl(55, 85%, 65%)',
+      'hsl(90, 85%, 65%)',
+      'hsl(160, 85%, 65%)',
+      'hsl(220, 85%, 65%)',
+      'hsl(265, 85%, 65%)',
+      'hsl(310, 85%, 65%)',
+      'hsl(360, 85%, 65%)'];
+    $game.empty();
+    for(i=0;i<cardValues.length;i++){
+      var $cardelement = $('<div class="col-sm-3 text cards">'+cardValues[i]+'</div>');
+      $cardelement.data('value',cardValues[i]);
+      $cardelement.data('flipped',false);
+      $cardelement.data('color',colorArray[Math.floor(i/2)]);
+      $game .append($cardelement);
+    };
+    shuffle($game);
+    $(".cards").click(function(){
+      MatchGame.flipCardsimple($(this),$('#game'));
+    })
+    mytimer();
+}
+MatchGame.flipCardsimple = function($card,$game) {
+  $card.css('background-color','darkgrey');
+  if(($card.data('flipped')===true)||(gamestart == false)){
+    return
+  }else{
+    $card.data('flipped',true);
+    $game.data('track').push($card);
+    var cardtrack = $game.data('track');
+    if(cardtrack.length===2){
+      var num1 = chinese.indexOf(cardtrack[0].data('value'));
+      var num2 = chinese.indexOf(cardtrack[1].data('value'))
+      var num3 = french.indexOf(cardtrack[1].data('value'))
+      var num4 = french.indexOf(cardtrack[0].data('value'))
+      var a = (num1 == num3)&&(num1>=0);
+      var b = (num2 == num4)&&(num2>=0);
+      if(a||b)
+      {
+        cardtrack[0].css({
+          "background-color": cardtrack[0].data('color')
+        })
+        cardtrack[1].css({
+          "background-color": cardtrack[1].data('color')
+        })
+        remaining = remaining - 2;
+        MatchGame.remainingcheck(remaining);
+      }else{
+        window.setTimeout(function() {
+        cardtrack[0].css('background-color','rgb(12,35,64)');
+        cardtrack[1].css('background-color','rgb(12,35,64)');
+        cardtrack[0].data('flipped',false);
+        cardtrack[1].data('flipped',false);
+      } , delaytime);
+      }
+      $game.data('track',[]);
+    }
+  }
 }
