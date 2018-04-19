@@ -25,6 +25,16 @@ $(document).ready(function () {
   var $game = $('#game');
   MatchGame.renderCards(cardValues,$game);
 })
+$('.restart').bind('click',function(){
+
+});
+$(document).on("click", ".restart", function(event){
+  clearTimeout(keepgoing);
+  gamestart = false;
+  var cardValues = MatchGame.generateCardValues();
+  var $game = $('#game');
+  MatchGame.renderCards(cardValues,$game);
+});
 $('#easy').click(function(){
   startdelay = 15000;
   timelimit = 60000;
@@ -58,13 +68,6 @@ $('#custom').click(function () {
   french = customfrench;
   chinese = customchinese;
 })
- $('.restart').click(function(){
-   clearTimeout(keepgoing);
-   var gamestart = false;
-   var cardValues = MatchGame.generateCardValues();
-   var $game = $('#game');
-   MatchGame.renderCards(cardValues,$game);
- });
  $('#starter').click(function(){
    gamestart = true;
    var cardValues = MatchGame.generateCardValues();
@@ -192,7 +195,7 @@ function getindex(input){
 MatchGame.remainingcheck = function(remaining){
   if(remaining == 0){
     $('#game').html('<h2 id="win"> YOU WIN <i class="fas fa-trophy"></i></h2>');
-    $('#game').append('<button type="button" id= "restart" class="btn btn-primary btn-lg restart"><i class="fas fa-redo fa-2x" style="color: purple"></i></button>')
+    $('#game').append('<button type="button" id="button" class="btn btn-primary restart btn-lg"><i class="fas fa-redo fa-2x" style="color: purple"></i></button>')
     $('#game').append('<button type="button" id= "setting" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-cog fa-2x" style="color: darkgrey"></i></button>')
     clearInterval(timer);
   }
