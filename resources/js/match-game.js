@@ -25,9 +25,7 @@ $(document).ready(function () {
   var $game = $('#game');
   MatchGame.renderCards(cardValues,$game);
 })
-$('.restart').bind('click',function(){
 
-});
 $(document).on("click", ".restart", function(event){
   clearTimeout(keepgoing);
   gamestart = false;
